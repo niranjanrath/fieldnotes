@@ -9,11 +9,11 @@ author:
 
 # For GitHub Pages project sites set baseurl to "/repo-name".
 # For user sites (username.github.io) leave baseurl empty.
-url: ""          # e.g. https://username.github.io
-baseurl: ""
+url: "https://niranjanrath.github.io"
+baseurl: "/fieldnotes"   # must match the repository name exactly
 
 # ---- Social (shown in footer + used by jekyll-seo-tag) ----------------
-github_username: ""      # e.g. nr
+github_username: "niranjanrath"
 twitter_username: ""
 # seo-tag settings
 logo: /assets/favicon.svg

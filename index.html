@@ -1,0 +1,63 @@
+---
+layout: default
+title: Writing
+---
+{%- if paginator.page == 1 %}
+<section class="hero wrap">
+  <p class="eyebrow">A developer's notebook</p>
+  <h1 class="hero-title">{{ site.tagline }}</h1>
+  <p class="hero-lede">{{ site.description }}</p>
+  <p class="hero-actions">
+    <a class="btn" href="{{ '/about/' | relative_url }}">About me</a>
+    <a class="btn btn-ghost" href="{{ '/feed.xml' | relative_url }}">Subscribe via RSS</a>
+  </p>
+</section>
+{%- endif %}
+
+<div class="wrap home">
+  {%- if paginator.page == 1 %}
+  {%- assign lead = paginator.posts | first %}
+  {%- assign rest = paginator.posts | slice: 1, 50 %}
+  {%- if lead %}
+  <article class="lead">
+    <p class="eyebrow">
+      Latest
+      <span class="dot" aria-hidden="true">·</span>
+      <time datetime="{{ lead.date | date_to_xmlschema }}">{{ lead.date | date: "%B %-d, %Y" }}</time>
+    </p>
+    <h2 class="lead-title"><a href="{{ lead.url | relative_url }}">{{ lead.title }}</a></h2>
+    {%- if lead.subtitle %}<p class="lead-dek">{{ lead.subtitle }}</p>{% endif %}
+    <p class="lead-excerpt">{{ lead.description | default: lead.excerpt | strip_html | normalize_whitespace | truncatewords: 48 }}</p>
+    <p class="meta">
+      <a class="read-more" href="{{ lead.url | relative_url }}">Read the essay <span aria-hidden="true">→</span></a>
+      <span class="dot" aria-hidden="true">·</span>
+      {% include reading-time.html content=lead.content %}
+      {%- if lead.tags.size > 0 %} {% include tag-list.html tags=lead.tags %}{% endif %}
+    </p>
+  </article>
+  {%- endif %}
+  {%- else %}
+  {%- assign rest = paginator.posts %}
+  {%- endif %}
+
+  {%- if rest.size > 0 %}
+  <section class="rows" aria-labelledby="more-h">
+    <h2 id="more-h" class="section-label">{% if paginator.page == 1 %}More writing{% else %}Writing — page {{ paginator.page }}{% endif %}</h2>
+    {%- for post in rest %}
+      {% include post-row.html post=post %}
+    {%- endfor %}
+  </section>
+  {%- endif %}
+
+  {%- if paginator.total_pages > 1 %}
+  <nav class="pagination" aria-label="Pagination">
+    {%- if paginator.previous_page %}
+    <a href="{{ paginator.previous_page_path | relative_url }}" rel="prev">← Newer</a>
+    {%- else %}<span class="disabled">← Newer</span>{% endif %}
+    <span class="pagination-count">Page {{ paginator.page }} of {{ paginator.total_pages }}</span>
+    {%- if paginator.next_page %}
+    <a href="{{ paginator.next_page_path | relative_url }}" rel="next">Older →</a>
+    {%- else %}<span class="disabled">Older →</span>{% endif %}
+  </nav>
+  {%- endif %}
+</div>

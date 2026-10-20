@@ -1,0 +1,58 @@
+/* Rouge syntax theme — "Ember". Colours adapt to light/dark via tokens. */
+:root {
+  --t-comment: #8a8372;
+  --t-keyword: #a2330f;
+  --t-string: #3f6b2c;
+  --t-number: #8a5a00;
+  --t-func: #1f5f8b;
+  --t-type: #7b3f98;
+  --t-attr: #0f6b6b;
+  --t-punct: #6c6558;
+  --t-del: #a2330f;
+  --t-ins: #3f6b2c;
+}
+:root[data-theme="dark"] {
+  --t-comment: #7d7767;
+  --t-keyword: #f08a5c;
+  --t-string: #a8cc84;
+  --t-number: #e6b85c;
+  --t-func: #7fbbe6;
+  --t-type: #c8a0e6;
+  --t-attr: #6fd0c9;
+  --t-punct: #9d9686;
+  --t-del: #f08a5c;
+  --t-ins: #a8cc84;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --t-comment: #7d7767; --t-keyword: #f08a5c; --t-string: #a8cc84; --t-number: #e6b85c;
+    --t-func: #7fbbe6; --t-type: #c8a0e6; --t-attr: #6fd0c9; --t-punct: #9d9686;
+    --t-del: #f08a5c; --t-ins: #a8cc84;
+  }
+}
+
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cm, .highlight .cp,
+.highlight .cpf, .highlight .c1, .highlight .cs { color: var(--t-comment); font-style: italic; }
+
+.highlight .k, .highlight .kc, .highlight .kd, .highlight .kn, .highlight .kp,
+.highlight .kr, .highlight .ow { color: var(--t-keyword); }
+.highlight .kt, .highlight .nc, .highlight .no, .highlight .nn, .highlight .ne { color: var(--t-type); }
+
+.highlight .s, .highlight .sa, .highlight .sb, .highlight .sc, .highlight .dl,
+.highlight .sd, .highlight .s2, .highlight .se, .highlight .sh, .highlight .si,
+.highlight .sx, .highlight .sr, .highlight .s1, .highlight .ss { color: var(--t-string); }
+
+.highlight .m, .highlight .mb, .highlight .mf, .highlight .mh, .highlight .mi,
+.highlight .il, .highlight .mo, .highlight .bp { color: var(--t-number); }
+
+.highlight .nf, .highlight .fm, .highlight .nd, .highlight .nb { color: var(--t-func); }
+.highlight .na, .highlight .nt, .highlight .py, .highlight .nl { color: var(--t-attr); }
+.highlight .nv, .highlight .vc, .highlight .vg, .highlight .vi, .highlight .vm, .highlight .n { color: inherit; }
+
+.highlight .o, .highlight .p { color: var(--t-punct); }
+.highlight .gd { color: var(--t-del); }
+.highlight .gi { color: var(--t-ins); }
+.highlight .ge { font-style: italic; }
+.highlight .gs { font-weight: 600; }
+.highlight .gh, .highlight .gu { color: var(--t-func); font-weight: 600; }
+.highlight .err { color: var(--t-keyword); }

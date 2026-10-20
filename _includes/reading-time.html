@@ -1,0 +1,4 @@
+{%- assign rt_words = include.content | number_of_words -%}
+{%- assign rt_mins = rt_words | divided_by: 225.0 | ceil -%}
+{%- if rt_mins < 1 %}{% assign rt_mins = 1 %}{% endif -%}
+{{ rt_mins }} min read

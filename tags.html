@@ -1,0 +1,36 @@
+---
+layout: default
+title: Topics
+permalink: /tags/
+description: Browse every post by topic.
+---
+{%- assign sorted_tags = site.tags | sort %}
+<article class="page">
+  <header class="post-head wrap-narrow">
+    <p class="eyebrow">Browse</p>
+    <h1 class="post-title">Topics</h1>
+    <p class="dek">Every post, grouped by what it's about.</p>
+  </header>
+
+  <div class="wrap-narrow">
+    <ul class="tag-cloud" aria-label="All topics">
+      {%- for tag in sorted_tags %}
+      <li><a class="tag tag-lg" href="#{{ tag[0] | slugify }}">{{ tag[0] }} <span class="tag-count">{{ tag[1].size }}</span></a></li>
+      {%- endfor %}
+    </ul>
+
+    {%- for tag in sorted_tags %}
+    <section class="tag-group" id="{{ tag[0] | slugify }}">
+      <h2 class="tag-group-title"><span class="hash" aria-hidden="true">#</span>{{ tag[0] }}</h2>
+      <ul class="plain-list">
+        {%- for post in tag[1] %}
+        <li>
+          <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+          <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+        </li>
+        {%- endfor %}
+      </ul>
+    </section>
+    {%- endfor %}
+  </div>
+</article>

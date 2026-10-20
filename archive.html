@@ -1,0 +1,29 @@
+---
+layout: default
+title: Archive
+permalink: /archive/
+description: Everything I've written, newest first.
+---
+<article class="page">
+  <header class="post-head wrap-narrow">
+    <p class="eyebrow">Index</p>
+    <h1 class="post-title">Archive</h1>
+    <p class="dek">{{ site.posts.size }} posts, newest first.</p>
+  </header>
+  <div class="wrap-narrow">
+    {%- assign by_year = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
+    {%- for year in by_year %}
+    <section class="tag-group">
+      <h2 class="tag-group-title">{{ year.name }}</h2>
+      <ul class="plain-list">
+        {%- for post in year.items %}
+        <li>
+          <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+          <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d" }}</time>
+        </li>
+        {%- endfor %}
+      </ul>
+    </section>
+    {%- endfor %}
+  </div>
+</article>

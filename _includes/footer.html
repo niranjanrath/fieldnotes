@@ -1,0 +1,23 @@
+<footer class="site-footer">
+  <div class="wrap foot">
+    <div class="foot-brand">
+      <p class="foot-title"><span aria-hidden="true">§</span> {{ site.title }}</p>
+      <p class="foot-desc">{{ site.tagline }}</p>
+    </div>
+    <nav class="foot-links" aria-label="Footer">
+      <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
+      <a href="{{ '/tags/' | relative_url }}">Topics</a>
+      <a href="{{ '/archive/' | relative_url }}">Archive</a>
+      {%- if site.github_username != "" %}
+      <a href="https://github.com/{{ site.github_username }}" rel="me">GitHub</a>
+      {%- endif %}
+      {%- if site.twitter_username != "" %}
+      <a href="https://twitter.com/{{ site.twitter_username }}" rel="me">Twitter</a>
+      {%- endif %}
+    </nav>
+    <p class="foot-fine">
+      © {{ 'now' | date: '%Y' }} {{ site.author.name }}. Set in Fraunces, Newsreader &amp; JetBrains&nbsp;Mono.
+      <a href="#top" class="to-top" data-to-top>Back to top&nbsp;↑</a>
+    </p>
+  </div>
+</footer>

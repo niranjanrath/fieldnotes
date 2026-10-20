@@ -1,0 +1,8 @@
+<nav class="tabbar" aria-label="Primary (mobile)">
+  {%- for item in site.data.navigation -%}
+    {%- assign is_current = false -%}
+    {%- if item.url == '/' and page.url == '/' %}{% assign is_current = true %}{% endif -%}
+    {%- if item.url != '/' and page.url contains item.url %}{% assign is_current = true %}{% endif -%}
+    <a href="{{ item.url | relative_url }}"{% if is_current %} aria-current="page"{% endif %}>{{ item.title }}</a>
+  {%- endfor -%}
+</nav>

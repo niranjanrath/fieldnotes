@@ -1,0 +1,68 @@
+---
+layout: default
+---
+<article class="post" itemscope itemtype="https://schema.org/BlogPosting">
+  <header class="post-head wrap-narrow">
+    <p class="eyebrow">
+      <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%B %-d, %Y" }}</time>
+      <span class="dot" aria-hidden="true">·</span>
+      {% include reading-time.html content=content %}
+    </p>
+    <h1 class="post-title" itemprop="headline">{{ page.title }}</h1>
+    {%- if page.subtitle %}
+    <p class="dek">{{ page.subtitle }}</p>
+    {%- endif %}
+    <p class="byline">
+      <span class="avatar" aria-hidden="true">{{ site.author.name | slice: 0 }}</span>
+      <span>By <span itemprop="author">{{ site.author.name }}</span></span>
+    </p>
+  </header>
+
+  <div class="post-grid">
+    <nav class="toc" aria-label="On this page" data-toc></nav>
+    <div class="prose" itemprop="articleBody" data-prose>
+      {{ content }}
+    </div>
+  </div>
+
+  <footer class="post-foot wrap-narrow">
+    {% include tag-list.html tags=page.tags %}
+
+    {%- if page.previous or page.next %}
+    <nav class="pager" aria-label="More posts">
+      {%- if page.next %}
+      <a class="pager-link" href="{{ page.next.url | relative_url }}" rel="prev">
+        <span class="pager-label">← Newer</span>
+        <span class="pager-title">{{ page.next.title }}</span>
+      </a>
+      {%- else %}<span></span>{% endif %}
+      {%- if page.previous %}
+      <a class="pager-link pager-older" href="{{ page.previous.url | relative_url }}" rel="next">
+        <span class="pager-label">Older →</span>
+        <span class="pager-title">{{ page.previous.title }}</span>
+      </a>
+      {%- endif %}
+    </nav>
+    {%- endif %}
+
+    {%- assign shown = 0 -%}
+    {%- capture related_html -%}
+      {%- for p in site.posts -%}
+        {%- if shown < 3 and p.url != page.url -%}
+          {%- assign hit = false -%}
+          {%- for t in p.tags -%}{%- if page.tags contains t -%}{%- assign hit = true -%}{%- endif -%}{%- endfor -%}
+          {%- if hit -%}
+            {%- assign shown = shown | plus: 1 -%}
+            <li><a href="{{ p.url | relative_url }}"><span class="rel-title">{{ p.title }}</span><span class="rel-date">{{ p.date | date: "%b %-d, %Y" }}</span></a></li>
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endcapture -%}
+    {%- if shown > 0 %}
+    <section class="related" aria-labelledby="related-h">
+      <h2 id="related-h" class="section-label">Keep reading</h2>
+      <ul class="related-list">{{ related_html }}</ul>
+    </section>
+    {%- endif %}
+  </footer>
+</article>

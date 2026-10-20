@@ -1,0 +1,54 @@
+# ---- Site -------------------------------------------------------------
+title: Fieldnotes
+tagline: Notes from the engineering side of the desk.
+description: Essays on software, architecture and the craft of building things that last — written slowly, shipped honestly.
+lang: en
+author:
+  name: NR
+  bio: Software engineer. I build full-stack apps, local-first tools and the occasional PWA.
+
+# For GitHub Pages project sites set baseurl to "/repo-name".
+# For user sites (username.github.io) leave baseurl empty.
+url: ""          # e.g. https://username.github.io
+baseurl: ""
+
+# ---- Social (shown in footer + used by jekyll-seo-tag) ----------------
+github_username: ""      # e.g. nr
+twitter_username: ""
+# seo-tag settings
+logo: /assets/favicon.svg
+social:
+  name: NR
+
+# ---- Build ------------------------------------------------------------
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  auto_ids: true
+  smart_quotes: lsquo,rsquo,ldquo,rdquo
+  typographic_symbols: { hellip: "…", mdash: "—", ndash: "–" }
+
+permalink: /:year/:title/
+paginate: 6
+paginate_path: /page:num/
+timezone: Europe/Amsterdam
+
+# Only plugins supported by GitHub Pages
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-paginate
+
+feed:
+  path: feed.xml
+
+defaults:
+  - scope: { path: "", type: posts }
+    values: { layout: post }
+  - scope: { path: "" }
+    values: { layout: default }
+
+exclude: [Gemfile, Gemfile.lock, README.md, node_modules, vendor, .github]

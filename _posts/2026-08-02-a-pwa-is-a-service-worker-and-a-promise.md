@@ -2,7 +2,7 @@
 title: A PWA is a service worker and a promise
 subtitle: The manifest is the easy part. The promise — "this works offline" — is the work.
 date: 2026-08-02 11:00:00 +0200
-tags: [pwa, javascript, local-first]
+tags: [engineering, pwa, javascript, local-first]
 description: What installability really requires, a minimal cache-first service worker, and the mobile details that make a web app feel native.
 ---
 Making a web app installable takes about ten minutes. Making it *dependable* takes longer, and it's the part users actually feel.

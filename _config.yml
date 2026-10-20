@@ -1,11 +1,11 @@
 # ---- Site -------------------------------------------------------------
 title: Fieldnotes
-tagline: Notes from the engineering side of the desk.
-description: Essays on software, architecture and the craft of building things that last — written slowly, shipped honestly.
+tagline: Architecture decisions, engineering details.
+description: Notes from a pi-shaped solution architect — deep in software architecture and in software engineering, and in the habit of connecting the two. Trade-offs, patterns and the code that proves them.
 lang: en
 author:
   name: NR
-  bio: Software engineer. I build full-stack apps, local-first tools and the occasional PWA.
+  bio: Solution architect, pi-shaped — deep in software architecture and software engineering.
 
 # For GitHub Pages project sites set baseurl to "/repo-name".
 # For user sites (username.github.io) leave baseurl empty.

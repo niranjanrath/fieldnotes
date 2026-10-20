@@ -2,7 +2,7 @@
 title: Typography is most of the interface
 subtitle: Ninety per cent of a reading UI is text. Treat the other ten as garnish.
 date: 2026-09-04 10:00:00 +0200
-tags: [css, design, typography]
+tags: [engineering, css, design, typography]
 description: A short, practical tour of the CSS that makes long-form text pleasant to read — measure, rhythm, optical sizes and the details that quietly add up.
 ---
 Open any article you've enjoyed and strip away the colours. What's left is typography, and it's doing nearly all the work. The good news: great reading experiences come from a handful of decisions you can make once and forget.

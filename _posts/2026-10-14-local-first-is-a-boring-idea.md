@@ -58,9 +58,9 @@ I won't pretend it's free. The honest list of costs:
 
 Notice that every row has a boring, shippable answer. That is the theme of this whole approach: **defer the hard distributed-systems problem until a real user actually has it.**
 
-## A rule of thumb
+## A rule of thumb (and an ADR)
 
-Ask of any new tool: *does this need to be multi-user on day one?* If the honest answer is no, start local, make export trivial, and add a sync layer only when someone asks for it. You'll ship sooner, your users will keep their data, and — a small bonus — your hosting bill will be zero.
+As an architect, the question I ask of any new tool is: *does this need to be multi-user on day one?* If the honest answer is no, start local, make export trivial, and add a sync layer only when someone asks for it. You'll ship sooner, your users will keep their data, and — a small bonus — your hosting bill will be zero.
 
 {: .callout}
 **Try it:** take the next side project you were going to wire to a database and ship it as a static page with IndexedDB instead. See how far you get in an afternoon.

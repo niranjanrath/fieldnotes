@@ -6,13 +6,19 @@ subtitle: A software engineer who likes small, sturdy tools.
 permalink: /about/
 description: About the author of Fieldnotes.
 ---
-I'm NR. I build software end to end — Spring Boot services, vanilla-JS progressive web apps and the occasional React tool — and I have a soft spot for apps that work offline, store their data on your device and do one thing well.
+I'm NR, a solution architect who is **pi-shaped**: two deep legs joined by a bar across the top. One leg is software architecture — shaping systems, drawing boundaries, weighing trade-offs and modelling threats. The other is software engineering — Spring Boot services, vanilla-JS progressive web apps, React tools and the tests that keep them honest.
 
-This blog is where I write things down so I stop forgetting them. Expect essays on architecture trade-offs, front-end craft, security habits and the small decisions that make software pleasant to live with.
+The bar across the top is the point. Architecture that never touches code drifts into slideware; code that never meets a decision record drifts into accidents. I write here to keep the two in conversation.
+
+## What you'll find
+
+- **Architecture:** trade-offs, C4 diagrams, local-first design and lightweight threat modelling.
+- **Engineering:** Java and Spring Boot, JavaScript and PWAs, CSS and performance.
+- **In between:** how a decision on a whiteboard survives contact with a pull request.
 
 ## How I write
 
-I try to keep each post to one idea, show the code that matters and skip the rest. If something here is wrong, I'd rather hear about it than be quietly out of date.
+One idea per post, the code that matters, and the trade-off stated plainly. If something here is wrong, I'd rather hear about it than be quietly out of date.
 
 ## Elsewhere
 

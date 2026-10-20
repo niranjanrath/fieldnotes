@@ -2,7 +2,7 @@
 title: Cutting Spring Boot startup time, one honest measurement at a time
 subtitle: Before you reach for native images, find out where the seconds actually go.
 date: 2026-08-18 09:15:00 +0200
-tags: [java, spring-boot, performance]
+tags: [engineering, java, spring-boot, performance]
 description: A measure-first approach to slow Spring Boot startups — what to log, what to lazy-load and which cheap wins to try before anything exotic.
 ---
 "Our app takes forever to start" is a feeling, not a diagnosis. The fix for a feeling is a number — and Spring Boot will give you plenty of them if you ask.

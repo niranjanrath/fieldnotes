@@ -4,13 +4,25 @@ title: Writing
 ---
 {%- if paginator.page == 1 %}
 <section class="hero wrap">
-  <p class="eyebrow">A developer's notebook</p>
+  <p class="eyebrow">A solution architect's notebook</p>
   <h1 class="hero-title">{{ site.tagline }}</h1>
   <p class="hero-lede">{{ site.description }}</p>
   <p class="hero-actions">
     <a class="btn" href="{{ '/about/' | relative_url }}">About me</a>
-    <a class="btn btn-ghost" href="{{ '/feed.xml' | relative_url }}">Subscribe via RSS</a>
+    <a class="btn btn-ghost" href="{{ '/tags/' | relative_url }}">Browse by topic</a>
   </p>
+  <div class="legs" aria-label="Two areas of depth">
+    <a class="leg" href="{{ '/tags/' | relative_url }}#architecture">
+      <span class="leg-label">Leg one</span>
+      <span class="leg-title">Software architecture</span>
+      <span class="leg-text">Trade-offs, boundaries, C4 and threat models — deciding what to build and why.</span>
+    </a>
+    <a class="leg" href="{{ '/tags/' | relative_url }}#engineering">
+      <span class="leg-label">Leg two</span>
+      <span class="leg-title">Software engineering</span>
+      <span class="leg-text">Code, tests, performance and craft — making the decision real and keeping it honest.</span>
+    </a>
+  </div>
 </section>
 {%- endif %}
 

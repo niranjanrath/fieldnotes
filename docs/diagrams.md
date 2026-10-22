@@ -2,7 +2,7 @@
 
 Write a diagram as text in a post and the page draws it — themed to the blog, light and dark,
 click-to-zoom, with the source one click away. A complete example lives in
-`_posts/2026-10-22-draw-it-in-text-review-it-in-a-pull-request.md`.
+`_posts/2026-10-21-draw-it-in-text-review-it-in-a-pull-request.md`.
 
 ## 1. Basic use
 

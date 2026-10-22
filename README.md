@@ -6,7 +6,11 @@ compatible (only allowed plugins; no build step beyond Jekyll).
 
 ## Run locally
     bundle install
-    bundle exec jekyll serve      # http://localhost:4000
+    bundle exec jekyll serve      # http://localhost:4000/fieldnotes/  (baseurl is part of the URL)
+    bundle exec jekyll serve --baseurl ""   # or serve at http://localhost:4000/
+
+A post dated in the future is **not built** (Jekyll's default). If a post is missing, check its `date`
+(including the time and timezone) or run `jekyll serve --future`.
 
 ## Deploy (GitHub Pages)
 1. Push to a repo; Settings → Pages → deploy from branch.
@@ -22,9 +26,9 @@ Add `_posts/YYYY-MM-DD-title.md`:
     description: One-line summary for lists and SEO
     ---
 
-Images: see [`docs/images.md`](docs/images.md) (responsive, lazy, dark-mode aware, zoomable). Example post: `_posts/2026-10-22-diagrams-belong-next-to-the-code.md`.
+Images: see [`docs/images.md`](docs/images.md) (responsive, lazy, dark-mode aware, zoomable). Example post: `_posts/2026-10-21-diagrams-belong-next-to-the-code.md`.
 
-Diagrams from code (Mermaid): see [`docs/diagrams.md`](docs/diagrams.md). Example post: `_posts/2026-10-22-draw-it-in-text-review-it-in-a-pull-request.md`.
+Diagrams from code (Mermaid): see [`docs/diagrams.md`](docs/diagrams.md). Example post: `_posts/2026-10-21-draw-it-in-text-review-it-in-a-pull-request.md`.
 
 Callout: put `{: .callout}` on the line before a paragraph.
 

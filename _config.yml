@@ -51,7 +51,7 @@ feed:
 defaults:
   - scope: { path: "", type: posts }
     values: { layout: post }
-  - scope: { path: "" }
+  - scope: { path: "", type: pages }
     values: { layout: default }
 
 exclude: [docs, Gemfile, Gemfile.lock, README.md, node_modules, vendor, .github]

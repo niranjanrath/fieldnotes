@@ -44,6 +44,20 @@
     // Diagrams from code: ```mermaid fences become live, theme-aware SVG.
     // The source stays available ("View source") and is the fallback if
     // the library can't load.
+    // Rouge has no "mermaid" lexer, so kramdown emits a bare <pre><code class="language-mermaid">;
+    // other languages come wrapped in div.highlighter-rouge. Normalise to the wrapped form.
+    $$("pre > code.language-mermaid", prose).forEach(function (code) {
+      var pre = code.parentNode;
+      if (pre.closest("div.language-mermaid")) return;
+      var outer = document.createElement("div");
+      outer.className = "language-mermaid highlighter-rouge";
+      var inner = document.createElement("div");
+      inner.className = "highlight";
+      pre.classList.add("highlight");
+      pre.parentNode.insertBefore(outer, pre);
+      inner.appendChild(pre);
+      outer.appendChild(inner);
+    });
     var mmBlocks = $$("div.language-mermaid", prose);
     if (mmBlocks.length) {
       var items = mmBlocks.map(function (block) {

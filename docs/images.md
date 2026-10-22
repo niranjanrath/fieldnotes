@@ -2,7 +2,7 @@
 
 Every image on the blog is **responsive, lazy-loaded, layout-shift free, keyboard accessible,
 dark-mode aware (optional) and click-to-zoom.** There are two ways to add one. A complete
-example lives in `_posts/2026-10-22-diagrams-belong-next-to-the-code.md`.
+example lives in `_posts/2026-10-21-diagrams-belong-next-to-the-code.md`.
 
 ## 1. Where files go
 

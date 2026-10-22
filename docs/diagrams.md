@@ -75,7 +75,7 @@ For full C4 modelling use Structurizr and publish an exported image with
 
 ## 6. Technical notes
 
-- Library: Mermaid 11, self-hosted at `assets/js/vendor/mermaid.min.js` (MIT licence file alongside).
+- Library: Mermaid 11, self-hosted at `assets/js/lib/mermaid.min.js` (MIT licence file alongside).
   No third-party requests are made. To upgrade, replace that file with a newer `dist/mermaid.min.js`.
 - Rendering uses `securityLevel: "strict"`, which sanitises labels and disables click handlers.
 - Where it's wired: `assets/js/main.js` (search for "Diagrams from code") and the

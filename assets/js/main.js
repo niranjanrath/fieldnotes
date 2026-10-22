@@ -144,7 +144,15 @@
         renderAll();
         document.addEventListener("themechange", renderAll);
       };
-      document.head.appendChild(s);   // on failure the source simply stays visible
+      s.onerror = function () {
+        items.forEach(function (it) {
+          var note = document.createElement("p");
+          note.className = "diagram-err";
+          note.textContent = "The diagram library could not be loaded (" + s.src + "). Showing the source instead.";
+          it.det.appendChild(note);
+        });
+      };
+      document.head.appendChild(s);
     }
 
     // Code blocks: language label + copy button

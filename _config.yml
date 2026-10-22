@@ -1,7 +1,7 @@
 # ---- Site -------------------------------------------------------------
 title: Fieldnotes
 tagline: Architecture decisions, engineering details.
-description: Practical insights on software architecture and engineering from system design and architectural patterns to implementation, testing, and the trade-offs that shape real-world systems.
+description: Notes from a pi-shaped solution architect — deep in software architecture and in software engineering, and in the habit of connecting the two. Trade-offs, patterns and the code that proves them.
 lang: en
 author:
   name: NR

@@ -20,6 +20,9 @@ logo: /assets/favicon.svg
 social:
   name: NR
 
+# Accent colour: teal (default) or terracotta
+accent: terracotta
+
 # ---- Build ------------------------------------------------------------
 markdown: kramdown
 highlighter: rouge
@@ -51,4 +54,4 @@ defaults:
   - scope: { path: "" }
     values: { layout: default }
 
-exclude: [Gemfile, Gemfile.lock, README.md, node_modules, vendor, .github]
+exclude: [docs, Gemfile, Gemfile.lock, README.md, node_modules, vendor, .github]

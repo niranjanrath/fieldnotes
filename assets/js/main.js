@@ -14,6 +14,7 @@
       root.setAttribute("data-theme", next);
       try { localStorage.setItem("theme", next); } catch (e) {}
       btn.setAttribute("aria-pressed", next === "dark");
+      document.dispatchEvent(new Event("themechange"));
     });
     btn.setAttribute("aria-pressed", root.getAttribute("data-theme") === "dark");
   });
@@ -39,6 +40,98 @@
       a.textContent = "#";
       h.insertBefore(a, h.firstChild);
     });
+
+    // Diagrams from code: ```mermaid fences become live, theme-aware SVG.
+    // The source stays available ("View source") and is the fallback if
+    // the library can't load.
+    var mmBlocks = $$("div.language-mermaid", prose);
+    if (mmBlocks.length) {
+      var items = mmBlocks.map(function (block) {
+        var meta = { caption: "", alt: "", wide: false };
+        var raw = $("code", block).textContent.replace(/\n$/, "");
+        var src = raw.split("\n").filter(function (l) {
+          var m = l.match(/^\s*%%\s*(caption|alt):\s*(.*)$/i);
+          if (m) { meta[m[1].toLowerCase()] = m[2]; return false; }
+          if (/^\s*%%\s*wide\s*$/i.test(l)) { meta.wide = true; return false; }
+          return true;
+        }).join("\n");
+
+        var fig = document.createElement("figure");
+        fig.className = "fig diagram" + (meta.wide ? " fig-wide" : "");
+        var holder = document.createElement("div");
+        holder.className = "mermaid";
+        holder.hidden = true;
+        holder.setAttribute("role", "img");
+        holder.setAttribute("tabindex", "0");
+        if (meta.alt) holder.setAttribute("aria-label", meta.alt);
+        var det = document.createElement("details");
+        det.className = "diagram-src";
+        det.open = true;
+        var sum = document.createElement("summary");
+        sum.textContent = "View diagram source";
+        det.appendChild(sum);
+
+        block.parentNode.insertBefore(fig, block);
+        det.appendChild(block);
+        fig.appendChild(holder);
+        if (meta.caption) {
+          var fc = document.createElement("figcaption");
+          fc.textContent = meta.caption;
+          fig.appendChild(fc);
+        }
+        fig.appendChild(det);
+
+        holder.addEventListener("click", function () { openSvg(holder); });
+        holder.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openSvg(holder); } });
+        return { src: src, holder: holder, det: det };
+      });
+
+      var cssv = function (n) { return getComputedStyle(root).getPropertyValue(n).trim(); };
+      var counter = 0;
+      var renderAll = function () {
+        var m = window.mermaid;
+        m.initialize({
+          startOnLoad: false, securityLevel: "strict", theme: "base",
+          fontFamily: getComputedStyle(document.body).fontFamily,
+          themeVariables: {
+            background: cssv("--paper-2"), primaryColor: cssv("--accent-soft"), primaryBorderColor: cssv("--accent"),
+            primaryTextColor: cssv("--ink"), secondaryColor: cssv("--paper"), secondaryBorderColor: cssv("--rule-strong"),
+            secondaryTextColor: cssv("--ink"), tertiaryColor: cssv("--paper"), tertiaryBorderColor: cssv("--rule-strong"),
+            tertiaryTextColor: cssv("--ink"), lineColor: cssv("--muted"), textColor: cssv("--ink"),
+            mainBkg: cssv("--accent-soft"), nodeBorder: cssv("--accent"), clusterBkg: cssv("--paper"), clusterBorder: cssv("--rule-strong"),
+            edgeLabelBackground: cssv("--paper-2"), noteBkgColor: cssv("--paper"), noteTextColor: cssv("--ink"), noteBorderColor: cssv("--rule-strong"),
+            actorBkg: cssv("--accent-soft"), actorBorder: cssv("--accent"), actorTextColor: cssv("--ink"), actorLineColor: cssv("--rule-strong"),
+            signalColor: cssv("--ink"), signalTextColor: cssv("--ink"), labelBoxBkgColor: cssv("--paper"), labelBoxBorderColor: cssv("--rule-strong"),
+            labelTextColor: cssv("--ink"), loopTextColor: cssv("--ink"), activationBkgColor: cssv("--accent-soft"), activationBorderColor: cssv("--accent"),
+            fontSize: "15px"
+          },
+          flowchart: { curve: "basis", padding: 14 }
+        });
+        items.forEach(function (it) {
+          m.render("mmd-" + (++counter), it.src).then(function (res) {
+            it.holder.innerHTML = res.svg;
+            it.holder.hidden = false;
+            it.det.open = false;
+          }).catch(function (err) {
+            it.holder.hidden = true;
+            it.det.open = true;
+            if (!it.det.querySelector(".diagram-err")) {
+              var note = document.createElement("p");
+              note.className = "diagram-err";
+              note.textContent = "This diagram could not be rendered: " + String((err && err.message) || err).split("\n")[0];
+              it.det.appendChild(note);
+            }
+          });
+        });
+      };
+      var s = document.createElement("script");
+      s.src = document.body.getAttribute("data-mermaid");
+      s.onload = function () {
+        renderAll();
+        document.addEventListener("themechange", renderAll);
+      };
+      document.head.appendChild(s);   // on failure the source simply stays visible
+    }
 
     // Code blocks: language label + copy button
     $$("div.highlighter-rouge", prose).forEach(function (block) {
@@ -73,6 +166,71 @@
       bar.appendChild(lang);
       bar.appendChild(copy);
       block.insertBefore(bar, block.firstChild);
+    });
+
+    // Images: lazy + async by default, wrap lone markdown images in <figure>
+    $$("p > img:only-child", prose).forEach(function (img) {
+      var p = img.parentNode;
+      if (p.childNodes.length !== 1) return;
+      var fig = document.createElement("figure");
+      fig.className = "fig";
+      var cap = img.getAttribute("title");
+      p.parentNode.replaceChild(fig, p);
+      fig.appendChild(img);
+      if (cap) {
+        img.removeAttribute("title");
+        var fc = document.createElement("figcaption");
+        fc.textContent = cap;
+        fig.appendChild(fc);
+      }
+    });
+    $$("img", prose).forEach(function (img) {
+      if (!img.hasAttribute("loading")) img.setAttribute("loading", "lazy");
+      if (!img.hasAttribute("decoding")) img.setAttribute("decoding", "async");
+    });
+
+    // Lightbox (click or Enter on any figure; Esc / click to close)
+    var box = null;
+    function ensureBox() {
+      if (box) return box;
+      box = document.createElement("dialog");
+      box.className = "lightbox";
+      box.setAttribute("aria-label", "Image viewer");
+      box.innerHTML = '<button type="button" aria-label="Close image">Close · esc</button><figure><img alt=""><div class="lb-svg" hidden></div><figcaption></figcaption></figure>';
+      document.body.appendChild(box);
+      box.addEventListener("click", function () { box.close(); });
+      return box;
+    }
+    function captionFor(el, fallback) {
+      var f = el.closest("figure"), fc = f && $("figcaption", f);
+      return fc ? fc.textContent : fallback;
+    }
+    function openBox(img) {
+      if (typeof HTMLDialogElement === "undefined") return;
+      ensureBox();
+      var big = $("img", box), wrap = $(".lb-svg", box);
+      wrap.hidden = true; big.hidden = false;
+      big.src = img.currentSrc || img.src;
+      big.alt = img.alt;
+      $("figcaption", box).textContent = captionFor(img, img.alt);
+      box.showModal();
+    }
+    function openSvg(holder) {
+      if (typeof HTMLDialogElement === "undefined") return;
+      ensureBox();
+      var big = $("img", box), wrap = $(".lb-svg", box);
+      big.hidden = true; wrap.hidden = false;
+      wrap.innerHTML = holder.innerHTML;
+      var svg = $("svg", wrap);
+      if (svg) { svg.removeAttribute("width"); svg.removeAttribute("height"); svg.style.maxWidth = "none"; svg.style.width = "100%"; }
+      $("figcaption", box).textContent = captionFor(holder, "");
+      box.showModal();
+    }
+    $$("figure.fig:not(.no-zoom) img", prose).forEach(function (img) {
+      img.setAttribute("tabindex", "0");
+      img.setAttribute("role", "button");
+      img.addEventListener("click", function () { openBox(img); });
+      img.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openBox(img); } });
     });
 
     // Table of contents (posts only, when there is enough to navigate)

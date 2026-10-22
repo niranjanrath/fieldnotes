@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="{{ '/assets/css/fonts.css' | relative_url }}">
 <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
 <link rel="stylesheet" href="{{ '/assets/css/syntax.css' | relative_url }}">
-<link rel="icon" type="image/svg+xml" href="{{ '/assets/favicon.svg' | relative_url }}">
+<link rel="icon" type="image/svg+xml" href="{% if site.accent == 'terracotta' %}{{ '/assets/favicon-terracotta.svg' | relative_url }}{% else %}{{ '/assets/favicon.svg' | relative_url }}{% endif %}">
 
 {% seo %}
 {% feed_meta %}

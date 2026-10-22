@@ -22,12 +22,16 @@ Add `_posts/YYYY-MM-DD-title.md`:
     description: One-line summary for lists and SEO
     ---
 
+Images: see [`docs/images.md`](docs/images.md) (responsive, lazy, dark-mode aware, zoomable). Example post: `_posts/2026-10-22-diagrams-belong-next-to-the-code.md`.
+
+Diagrams from code (Mermaid): see [`docs/diagrams.md`](docs/diagrams.md). Example post: `_posts/2026-10-22-draw-it-in-text-review-it-in-a-pull-request.md`.
+
 Callout: put `{: .callout}` on the line before a paragraph.
 
 ## Customise
 - Name, tagline, author, social: `_config.yml`
 - Navigation: `_data/navigation.yml`
-- Colours & type: tokens at the top of `assets/css/main.css`
+- Accent colour: `accent: teal` or `accent: terracotta` in `_config.yml`; all tokens at the top of `assets/css/main.css`
 - Fonts are self-hosted in `assets/fonts` (SIL OFL).
 
 The five posts are sample content: delete them and write your own.

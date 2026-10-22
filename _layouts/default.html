@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="{{ site.lang | default: 'en' }}">
+<html lang="{{ site.lang | default: 'en' }}" data-accent="{{ site.accent | default: 'terracotta' }}">
 <head>
   {% include head.html %}
 </head>
-<body class="layout-{{ page.layout }}" data-search="{{ '/search.json' | relative_url }}">
+<body class="layout-{{ page.layout }}" data-search="{{ '/search.json' | relative_url }}" data-mermaid="{{ '/assets/js/vendor/mermaid.min.js' | relative_url }}">
   <a class="skip" href="#main">Skip to content</a>
   <div class="progress" aria-hidden="true"><span></span></div>
 

@@ -1,6 +1,6 @@
 /* Rouge syntax theme — "Ember". Colours adapt to light/dark via tokens. */
 :root {
-  --t-comment: #8a8372;
+  --t-comment: #6f6958;
   --t-keyword: #a2330f;
   --t-string: #3f6b2c;
   --t-number: #8a5a00;
@@ -12,7 +12,7 @@
   --t-ins: #3f6b2c;
 }
 :root[data-theme="dark"] {
-  --t-comment: #7d7767;
+  --t-comment: #8f8977;
   --t-keyword: #f08a5c;
   --t-string: #a8cc84;
   --t-number: #e6b85c;
@@ -25,7 +25,7 @@
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
-    --t-comment: #7d7767; --t-keyword: #f08a5c; --t-string: #a8cc84; --t-number: #e6b85c;
+    --t-comment: #8f8977; --t-keyword: #f08a5c; --t-string: #a8cc84; --t-number: #e6b85c;
     --t-func: #7fbbe6; --t-type: #c8a0e6; --t-attr: #6fd0c9; --t-punct: #9d9686;
     --t-del: #f08a5c; --t-ins: #a8cc84;
   }

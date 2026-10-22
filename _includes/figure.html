@@ -1,0 +1,29 @@
+{%- comment -%}
+  Responsive, accessible figure. See docs/images.md for every option.
+
+  Required:  src, alt, width, height
+  Optional:  caption (markdown ok) · wide=true · dark (dark-mode variant of src)
+             webp (modern format for <picture>) · srcset / webp_srcset ("/assets/a-720.png 720w, /assets/a-1440.png 1440w")
+             sizes · eager=true (above-the-fold images only) · zoom=false (disable lightbox)
+{%- endcomment -%}
+{%- assign pre = site.baseurl | append: '/assets/' -%}
+{%- assign sizes = include.sizes | default: '(min-width: 1200px) 38rem, 100vw' -%}
+{%- if include.wide %}{% assign sizes = include.sizes | default: '(min-width: 1200px) 46rem, 100vw' %}{% endif -%}
+{%- assign loading = 'lazy' -%}
+{%- if include.eager %}{% assign loading = 'eager' %}{% endif -%}
+<figure class="fig{% if include.wide %} fig-wide{% endif %}{% if include.zoom == false %} no-zoom{% endif %}">
+  {%- if include.dark -%}
+  <img class="img-light" src="{{ include.src | relative_url }}" alt="{{ include.alt | escape }}" width="{{ include.width }}" height="{{ include.height }}" loading="{{ loading }}" decoding="async">
+  <img class="img-dark" src="{{ include.dark | relative_url }}" alt="{{ include.alt | escape }}" width="{{ include.width }}" height="{{ include.height }}" loading="{{ loading }}" decoding="async">
+  {%- elsif include.webp -%}
+  <picture>
+    <source type="image/webp" srcset="{{ include.webp_srcset | default: include.webp | replace: '/assets/', pre }}" sizes="{{ sizes }}">
+    <img src="{{ include.src | relative_url }}"{% if include.srcset %} srcset="{{ include.srcset | replace: '/assets/', pre }}" sizes="{{ sizes }}"{% endif %} alt="{{ include.alt | escape }}" width="{{ include.width }}" height="{{ include.height }}" loading="{{ loading }}" decoding="async">
+  </picture>
+  {%- else -%}
+  <img src="{{ include.src | relative_url }}"{% if include.srcset %} srcset="{{ include.srcset | replace: '/assets/', pre }}" sizes="{{ sizes }}"{% endif %} alt="{{ include.alt | escape }}" width="{{ include.width }}" height="{{ include.height }}" loading="{{ loading }}" decoding="async">
+  {%- endif -%}
+  {%- if include.caption -%}
+  <figcaption>{{ include.caption | markdownify | remove: '<p>' | remove: '</p>' | strip }}</figcaption>
+  {%- endif -%}
+</figure>

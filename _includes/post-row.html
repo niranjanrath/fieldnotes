@@ -7,9 +7,9 @@
   <div class="row-body">
     <h3 class="row-title"><a href="{{ p.url | relative_url }}">{{ p.title }}</a></h3>
     <p class="row-excerpt">{{ p.description | default: p.excerpt | strip_html | normalize_whitespace | truncatewords: 34 }}</p>
-    <p class="meta">
+    <div class="meta">
       {% include reading-time.html content=p.content %}
       {%- if p.tags.size > 0 %} {% include tag-list.html tags=p.tags %}{% endif %}
-    </p>
+    </div>
   </div>
 </article>

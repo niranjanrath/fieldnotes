@@ -28,12 +28,12 @@ title: Writing
     <h2 class="lead-title"><a href="{{ lead.url | relative_url }}">{{ lead.title }}</a></h2>
     {%- if lead.subtitle %}<p class="lead-dek">{{ lead.subtitle }}</p>{% endif %}
     <p class="lead-excerpt">{{ lead.description | default: lead.excerpt | strip_html | normalize_whitespace | truncatewords: 48 }}</p>
-    <p class="meta">
+    <div class="meta">
       <a class="read-more" href="{{ lead.url | relative_url }}">Read the essay <span aria-hidden="true">→</span></a>
       <span class="dot" aria-hidden="true">·</span>
       {% include reading-time.html content=lead.content %}
       {%- if lead.tags.size > 0 %} {% include tag-list.html tags=lead.tags %}{% endif %}
-    </p>
+    </div>
   </article>
   {%- endif %}
   {%- else %}
